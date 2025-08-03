@@ -3,7 +3,7 @@
 安裝方式:
 1. 將本環境git clone至你的工作區.
 2. 申請 Aras Innovator 2025的社群版安裝程式. 並將它複製到工作區來(供後續在容器中執行安裝, 本例使用的是 2025版本, 其他鄰近的版本是否適用,需待驗證).
-3. 建立 Docker Image環境 [當然你也可以採用現成的image:我在[DockerHub上的image]{https://docker}).
+3. 建立 Docker Image環境 (當然你也可以採用現成的image:我在[DockerHub上的image](https://hub.docker.com/repository/docker/jetlo0718/innovator_pre_env/general)).
 ```
 # 使用Dockerfile內容來建立image,過程中會複製 工作區的InnovatorSetup.msi與start.ps1會被docker複製到image中.
 docker build . -t="[your image name]"
