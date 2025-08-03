@@ -12,7 +12,7 @@ docker build . -t="[your image name]"
 docker pull jetlo0718/innovator_pre_env:2025
 ```
 4. 依你實際環境需要,修改 .env 環境變數的值 (如 sql server主機服務位置, sa與innovator*的密碼), 
-5. docker-compose.yml中 請將 mac_address 修改成你要指定的位址,以利你向aras Innovator申請社群版授權碼. 執行Docker Compose指令來建立docker 容器環境
+5. docker-compose.yml中 請將 mac_address 修改成你要指定的位址,以利你向aras Innovator申請社群版授權碼(此時安裝授權碼會給空值). 執行Docker Compose指令來建立docker 容器環境
 ```
 docker-compose up -d
 # 首次安裝會需要數分鐘到十多分鍾的時間來安裝Aras Innovator, 請稍候之.
@@ -42,6 +42,23 @@ Testing SQL Server connection...
 Ensuring World Wide Web Publishing Service (w3svc) is running...
 ✅ w3svc 服務正在運行。
 🚀 容器正在運行。監控 w3svc 服務...
+```
+
+7. 若你以指定的 mac_address 申請了授權碼, 請利用 `docker cp `指令將 `C:\Innovator\InnovatorServerConfig.xml` 複製出來將授權碼維護進去後, 再複製進去容器中.
+```
+# 請記得先停止運行中的container;
+docker container stop [your container name]
+# 由容器中的目錄複製檔案到宿主機當下的目錄
+docker cp [your container name]:C:\Innovator\InnovagtorServerConfig.xml .
+# 編輯設定文件,將授權碼維護進去.
+notepad InnovatorServerConfig.xml
+
+# 修改後再將設定檔案複製回容器中.
+docker cp InnovatorServerConfig.xml [your container name]:C:\Innovator\
+
+# 記得再啟動容器來試連線, 祝一切順利.
+docker container start [your container name]
+
 ```
 Aras Innovator 2025 AP server 安裝前的預備環境, 本image需搭配幾個文件來建立容器: innovatorSetup.msi(2025社群版安裝文件), start.ps1 (安裝指令文件), docker-compose.yml (Compose設定文件), .env (安裝環境參數文件).
 詳情請參考 個人的github上說明: https://github.com/jet0718/aras_innovator_2025_ap_docker
