@@ -9,7 +9,7 @@
 	<disabled_operating_parameter key="email_debug_option" value="file"/>
 	<!-- Paste you Innovator License Key below. Attention: It has to match the Mac Adress configured in the docker-compose.yml -->
 	<!-- You can request a license key here: https://www.aras.com/en/support/licensekeyservice -->
-	<!-- name=Broadway Consulting Services Co. Ltd - China   mac_address=92-95-5E-30-FE-6D   version=14.0  -->
+	<!-- name=Broadway Consulting Services Co. Ltd - China   mac_address=99-99-99-99-99-99   version=14.0  -->
 	<License  lic_type="Unlimited" lic_key="" act_key=""/>
 	<Mail SMTPServer="queue"/>
 	<operating_parameter key="temp_folder" value="C:\Innovator\Innovator\Server\temp\"/>
