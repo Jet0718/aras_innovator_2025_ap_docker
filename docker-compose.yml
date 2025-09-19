@@ -2,15 +2,10 @@
 services:
   innovator-ap:
     container_name: aras2025_ap # 指定容器的名稱
-    image: jetlo0718/innovator_pre_env:2025  # 替換為您的 Docker 映像名稱
-    # ports:
-      # - "80:80"
-    # volumes:
-      # # 將主機上的安裝程式目錄掛載到容器中的 C:\Setup
-      # - arasvault:C:\Innovator\Vault
+    image: jetlo0718/innovator_pre_env:2025 # 替換為您的 Docker 映像名稱
     env_file:
       - .env
-    mac_address: 99-99-99-99-99-99 # 設定容器的 MAC 位址
+    mac_address: 00-60-5A-8D-29-27 # 設定容器的 MAC 位址
     ports: # 將主機連接埠映射到容器連接埠
       - "80:80" # 將主機的 8080 連接埠映射到容器的 80 連接埠 (HTTP)
     mem_limit: 6g # 設定容器的記憶體限制為 6GB
@@ -20,3 +15,4 @@ services:
 
 volumes:
   arasvault: # 定義一個名為 arasvault 的具名卷，用於持久化資料
+
