@@ -7,7 +7,7 @@ services:
       - .env
     mac_address: 00-60-5A-8D-29-27 # 設定容器的 MAC 位址
     ports: # 將主機連接埠映射到容器連接埠
-      - "80:80" # 將主機的 8080 連接埠映射到容器的 80 連接埠 (HTTP)
+      - "80:80" # 將主機的 80 連接埠映射到容器的 80 連接埠 (HTTP)
     mem_limit: 6g # 設定容器的記憶體限制為 6GB
     volumes: # 掛載具名卷到容器中
       - arasvault:C:\Innovator\Vault # 將名為 arasvault 的卷掛載到容器內的 c:\innovator\vault 路徑
