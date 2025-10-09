@@ -1,14 +1,14 @@
 # 建立Aras Innovator 2025 的 Docker AP環境
-嘗試使用Aras Innovator 2025的安裝檔案來建立Aras Innovator的Docker AP環境, 注意的是,本環境並不包含SQL Server, 所以SQL Server是外部連接.
+嘗試使用Aras Innovator 2025的安裝檔案來建立Aras Innovator的Docker AP環境, 本docker image內容只會將必要的環境與安裝程式搭建複製進來,在建立docker container時,才會開始安裝Aras Innovator,所以docker run的時間會比較久(10-30分鐘), 注意的是,本環境並不包含SQL Server, 所以SQL Server是外部連接.
 
 ## 準備:
-1. 在你的Windows環境裝好Docker Desktop,並啟動它.
-2. 確認已有SQL Server且為相容版本(2012以上)運行中.備好資料連線的位址與sa(或其他資料庫管理員的帳密),建立好innovator,innovator_regular這兩個資料庫user的密碼.
-3. 下載好[InnovatorSetup.msi](https://aras.com/en/download)的安裝程式(本例應先命名為InnovatorSetup-2025.msi)
+1. 在你的Windows環境裝好Docker Desktop,並啟動它(Aras Innovator必須使用windows base環境的docker).
+2. 確認外部已有SQL Server且為相容版本(2012以上)的主機服務運行中.備好資料連線的位址與sa(或其他資料庫管理員的帳密或授權管理的windows帳號),建立好innovator,innovator_regular這兩個資料庫user的密碼.
+3. 下載好[InnovatorSetup.msi](https://aras.com/en/download)的安裝程式(本例應先改命名為InnovatorSetup-2025.msi)
 4. 預定義好容器要使用的MAC_Address,並以此向Aras申請好Aras Innovator 2025的[社群版授權碼](https://aras.com/en/support/licensekeyservice/community-edition?version=14.0.0)
 
 ## 安裝方式:
-1. 將本環境git clone至你的工作根目錄,完成後切換到工作區中(ex: c:\test\aras_innovator_2025_ap_docker).
+1. 將本倉庫git clone至你的工作根目錄,完成後切換到工作區中(ex: c:\test\aras_innovator_2025_ap_docker).
 2. 申請 [Aras Innovator 2025的社群版安裝程式](https://aras.com/en/download). 並將它解壓後,得到InnovatorSetup.msi檔案,複製到工作區來,並更名為InnovatorSetup-2025.msi(供後續在容器中執行安裝, 本例使用的是 2025版本, 理論上14.x版本應皆適用,待驗證).
 3. 建立 Docker Image環境 (當然你也可以採用現成的image:我在[DockerHub上的image](https://hub.docker.com/repository/docker/jetlo0718/innovator_pre_env/general)).
 ```sh
