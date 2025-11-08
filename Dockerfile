@@ -13,8 +13,24 @@ RUN powershell -Command "`
     Start-Process -FilePath .\dotnet-hosting-bundle.exe -ArgumentList '/install', '/quiet', '/norestart' -Wait; `
     Remove-Item .\dotnet-hosting-bundle.exe
 
-# ...
-RUN powershell -Command "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force; $ErrorActionPreference = 'Stop'; New-Item -Path C:\Innovator -ItemType Directory -Force; icacls.exe 'C:\Innovator' /grant 'IIS_IUSRS:(OI)(CI)(M)' /T; Enable-WindowsOptionalFeature -Online -FeatureName IIS-HttpRedirect, IIS-ManagementScriptingTools -All";
+# 修正權限並設定 IIS：
+# ... (前面的 icacls 和 Enable-WindowsOptionalFeature 指令) ...
+RUN powershell -Command "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force; `
+    $ErrorActionPreference = 'Stop'; New-Item -Path C:\Innovator -ItemType Directory -Force; icacls.exe 'C:\Innovator' /grant 'IIS_IUSRS:(OI)(CI)M' /T; icacls.exe 'C:\Innovator' /grant 'ContainerAdministrator:(OI)(CI)F' /T; `
+    icacls.exe 'C:\Innovator' /grant 'SYSTEM:(OI)(CI)F' /T; Enable-WindowsOptionalFeature -Online -FeatureName IIS-HttpRedirect, IIS-ManagementScriptingTools -All; `
+    `
+    Write-Host '--- 正在設定 Windows Authentication ---'; `
+    `
+    Write-Host '步驟 1/3: 安裝 IIS-WindowsAuthentication 功能...'; `
+    Enable-WindowsOptionalFeature -Online -FeatureName IIS-WindowsAuthentication -All; `
+    `
+    Write-Host '步驟 2/3: 解除鎖定 windowsAuthentication 區段...'; `
+    C:\Windows\System32\inetsrv\appcmd.exe unlock config -section:system.webServer/security/authentication/windowsAuthentication; `
+    `
+    Write-Host '步驟 3/3: 在伺服器層級啟用 windowsAuthentication...'; `
+    C:\Windows\System32\inetsrv\appcmd.exe set config -section:system.webServer/security/authentication/windowsAuthentication /enabled:True /commit:apphost; `
+    `
+    Write-Host '--- Windows Authentication 設定完成 ---'"
 
 # 複製Aras Innovator安裝程式
 COPY InnovatorSetup-2025.msi .\InnovatorSetup.msi
