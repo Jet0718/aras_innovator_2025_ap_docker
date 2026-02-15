@@ -1,7 +1,9 @@
 #escape=`
 
 # 基礎映像: Windows Server 2019 with .NET 4.7.2 and ASP.NET
-FROM mcr.microsoft.com/dotnet/framework/aspnet:4.7.2-windowsservercore-ltsc2019
+# FROM mcr.microsoft.com/dotnet/framework/aspnet:4.7.2-windowsservercore-ltsc2019
+# 改用 2022, .net 4.8 and asp.net
+FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2022
 
 # 設定工作目錄
 WORKDIR /Setup
@@ -9,7 +11,7 @@ WORKDIR /Setup
 # 步驟 1: 安裝必要的相依性套件 (使用正確的 PowerShell 指令)
 # 使用 Invoke-WebRequest 下載 .NET Core Hosting Bundle
 RUN powershell -Command "`
-    Invoke-WebRequest -Uri https://builds.dotnet.microsoft.com/dotnet/aspnetcore/Runtime/8.0.18/dotnet-hosting-8.0.18-win.exe -OutFile dotnet-hosting-bundle.exe; `
+    Invoke-WebRequest -Uri https://builds.dotnet.microsoft.com/dotnet/aspnetcore/Runtime/8.0.24/dotnet-hosting-8.0.24-win.exe -OutFile dotnet-hosting-bundle.exe; `
     Start-Process -FilePath .\dotnet-hosting-bundle.exe -ArgumentList '/install', '/quiet', '/norestart' -Wait; `
     Remove-Item .\dotnet-hosting-bundle.exe
 

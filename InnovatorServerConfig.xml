@@ -15,11 +15,11 @@
 	<operating_parameter key="temp_folder" value="C:\Innovator\Innovator\Server\temp\"/>
 	<operating_parameter key="ServerMethodTempDir" value="C:\Innovator\Innovator\Server\dll\"/>
 	<operating_parameter key="debug_log_prefix" value="C:\Innovator\Innovator\Server\logs\"/>
-	<AgentService InnovatorToServiceAddress="http://localhost:8734/ArasInnovatorAgent"/>
+	<AgentService InnovatorToServiceAddress="http://localhost:8734/"/>
 	<OAuthServerDiscovery>
 		<Urls>
 			<Url value="$[HTTP_PREFIX_SERVER]$[HTTP_HOST_SERVER]$[HTTP_PORT_SERVER]$[HTTP_PATH_SERVER]/OAuthServer/"/>
 		</Urls>
 	</OAuthServerDiscovery>
-	<DB-Connection id="2025a" database="2025a" server="host.docker.internal" regular_uid="innovator_regular" regular_pwd="pass123" dbo_uid="innovator" dbo_pwd="pass123"/>
+	<DB-Connection id="2025d" database="2025d" server="host.docker.internal" regular_uid="innovator_regular" regular_pwd="innovator" dbo_uid="innovator" dbo_pwd="innovator"/>
 </Innovator>
