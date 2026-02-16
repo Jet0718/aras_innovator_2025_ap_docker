@@ -93,4 +93,7 @@ Innovator安裝失敗(完裝成功 `exit code : 0` , 若為`16XX`則表示安裝
 Aras Innovator 2025 AP server 安裝前的預備環境, 本image需搭配幾個文件來建立容器: `innovatorSetup-2025.msi`(2025社群版安裝文件), `start.ps1` (安裝指令文件), `docker-compose.yml` (Compose設定文件), `.env` (安裝環境參數文件,可由`.env.example`複製而得).
 詳情請參考 個人的github上說明: https://github.com/jet0718/aras_innovator_2025_ap_docker
 
+## 修訂記錄:
+2026-02-16 將image的基礎平台aspnet:4.7.2-windowsservercore-ltsc2019更新為mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2022; 另外dotnet-hosting-8.0.18-win.exe也升級為dotnet-hosting-8.0.24-win.exe. P.S.在build image時,可能會無法在docker中下載dotnet-hosting-8.0.24, 需要在Docker Desktop的setting中的Docker Engine設定增加預設dns Server的指向,可以幫助docker image building時能正確解析microsoft的dotnet-hosting的下載網址.
+
 作者: 羅仁 Jet Lo
