@@ -13,7 +13,7 @@ WORKDIR /Setup
 RUN powershell -Command "`
     Invoke-WebRequest -Uri https://builds.dotnet.microsoft.com/dotnet/aspnetcore/Runtime/8.0.24/dotnet-hosting-8.0.24-win.exe -OutFile dotnet-hosting-bundle.exe; `
     Start-Process -FilePath .\dotnet-hosting-bundle.exe -ArgumentList '/install', '/quiet', '/norestart' -Wait; `
-    Remove-Item .\dotnet-hosting-bundle.exe
+    Remove-Item .\dotnet-hosting-bundle.exe"
 
 # 修正權限並設定 IIS：
 # ... (前面的 icacls 和 Enable-WindowsOptionalFeature 指令) ...
@@ -33,7 +33,7 @@ RUN powershell -Command "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy
     C:\Windows\System32\inetsrv\appcmd.exe set config -section:system.webServer/security/authentication/windowsAuthentication /enabled:True /commit:apphost; `
     `
     Write-Host '--- Windows Authentication 設定完成 ---'"
-	
+
 # 複製Aras Innovator安裝程式
 COPY InnovatorSetup-2025.msi .\InnovatorSetup.msi
 
