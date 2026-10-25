@@ -153,7 +153,7 @@ docker-compose up -d
 #### 選項 B：使用 Docker Hub 現成映像檔
 若不自行本機建置，可使用 Docker Hub 上發佈之映像檔：
 ```powershell
-docker pull jetlo0718/innovator_pre_env:2025
+docker pull jetlo0718/innovator_pre_env:2025a
 docker-compose up -d
 ```
 
